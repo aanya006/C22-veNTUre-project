@@ -1,5 +1,6 @@
 import duckdb
-
+import numpy
+import pandas
 # Connect to (or create) a persistent database file
 con = duckdb.connect('data/processed/project.duckdb')
 
@@ -9,7 +10,7 @@ con = duckdb.connect('data/processed/project.duckdb')
 con.execute("""
     CREATE OR REPLACE TABLE trades AS
     SELECT *,
-           regexp_extract(filename, 'campaign_[0-9]+') AS campaignId
+           regexp_extract(filename, 'Campaign ([0-9]+)', 1) AS campaignId
     FROM read_csv_auto(
         'data/raw/user_trades/*.csv',
         union_by_name=true,
