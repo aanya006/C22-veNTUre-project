@@ -1,3 +1,6 @@
 Data/raw/
 *.csv
+.venv/
+User Data-*.zip
+User Trades-*.zip
 
